@@ -238,7 +238,7 @@ El workflow de GitHub Actions debe:
 2. Configurar Node.js 20 y Java JDK 17 (`temurin`).
 3. Instalar dependencias (`npm install`), sincronizar Capacitor Android (`npx cap add android || npx cap sync android`) y asegurar el permiso `VIBRATE` en `AndroidManifest.xml`.
 4. Compilar el APK con `cd android && chmod +x gradlew && ./gradlew assembleDebug`.
-5. Subir el archivo `android/app/build/outputs/apk/debug/app-debug.apk` usando `actions/upload-artifact@v4` con el nombre `Futsal-Crono-APK`.
+5. Subir el archivo `android/app/build/outputs/apk/debug/app-debug.apk` usando `actions/upload-artifact@v4` con el nombre `OrfanatoApp-APK`.
 
 ---
 

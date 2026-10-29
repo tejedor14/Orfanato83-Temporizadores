@@ -1,4 +1,4 @@
-# ⚽ Futsal Crono - Guía de Instalación y Uso
+# ⚽ OrfanatoApp - Guía de Instalación y Uso
 
 Aplicación móvil para Android optimizada para gestionar los tiempos de cambio y rotaciones de jugadores de fútbol sala entre amigos.
 
@@ -14,7 +14,7 @@ El proyecto incluye un flujo de compilación automática en la nube mediante **G
    ```bash
    git init
    git add .
-   git commit -m "Inicializar Futsal Crono"
+   git commit -m "Inicializar OrfanatoApp"
    git branch -M main
    git remote add origin https://github.com/TU_USUARIO/TU_REPOSITORIO.git
    git push -u origin main
@@ -24,7 +24,7 @@ El proyecto incluye un flujo de compilación automática en la nube mediante **G
 1. En tu repositorio de GitHub, haz clic en la pestaña **"Actions"**.
 2. Verás ejecutándose el flujo de trabajo **"Compilar APK Android"**. Tarda entre 2 y 3 minutos.
 3. Una vez terminado con éxito (icono verde ✅), entra en la ejecución.
-4. En la sección inferior **"Artifacts"**, descarga el archivo **`Futsal-Crono-APK`**.
+4. En la sección inferior **"Artifacts"**, descarga el archivo **`OrfanatoApp-APK`**.
 5. Descomprime el archivo descargado para obtener `app-debug.apk` y envíatelo al móvil (vía WhatsApp, Telegram, Google Drive o cable USB).
 6. En tu móvil Android, abre el archivo `app-debug.apk` y pulsa **Instalar** (permite instalar apps de fuentes desconocidas si te lo solicita).
 

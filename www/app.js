@@ -1,5 +1,5 @@
 /**
- * FUTSAL CRONO - LÓGICA DE APLICACIÓN
+ * ORFANATOAPP - LÓGICA DE APLICACIÓN
  * Cronómetro de cambios y rotaciones para fútbol sala
  * Implementación 100% matemática con marcas de tiempo reales (Date.now())
  */
