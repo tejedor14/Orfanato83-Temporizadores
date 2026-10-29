@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Futsal Crono</title>
+  <meta name="theme-color" content="#F8FAFC">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+
+    <!-- ==================== VISTA 1: CONFIGURACIÓN DE CONVOCATORIA ==================== -->
+    <section id="setup-view" class="view active">
+      <header class="view-header">
+        <div class="logo-title">
+          <span class="icon">⚽</span>
+          <h1>Futsal Crono</h1>
+        </div>
+        <p class="subtitle">Gestión de rotaciones y cambios entre amigos</p>
+      </header>
+
+      <main class="view-content">
+        <!-- Configurador del tiempo de cambio (Turno Base) -->
+        <section class="card config-card">
+          <div class="card-header">
+            <span class="card-icon">⏱️</span>
+            <div>
+              <h2 class="card-title">Duración del Turno</h2>
+              <p class="card-description">Tiempo de rotación para cada jugador</p>
+            </div>
+          </div>
+          <div class="stepper-control">
+            <button id="btn-base-minus" class="btn btn-secondary btn-step" type="button" aria-label="Restar 1 minuto">
+              −1 min
+            </button>
+            <div class="stepper-value-container">
+              <span id="base-turn-display" class="stepper-value">05:00</span>
+              <span class="stepper-unit">minutos</span>
+            </div>
+            <button id="btn-base-plus" class="btn btn-secondary btn-step" type="button" aria-label="Sumar 1 minuto">
+              +1 min
+            </button>
+          </div>
+        </section>
+
+        <!-- Interruptor de Escalonado Inicial -->
+        <section class="card config-card">
+          <label class="toggle-control" for="toggle-staggered">
+            <div class="toggle-info">
+              <div class="toggle-title-row">
+                <span class="card-icon">⚡</span>
+                <span class="toggle-title">Escalonar los primeros cambios</span>
+              </div>
+              <p class="card-description">
+                Asigna 2 minutos menos a los 2 primeros titulares que entren para que no pidan cambio todos a la vez.
+              </p>
+            </div>
+            <div class="switch">
+              <input type="checkbox" id="toggle-staggered">
+              <span class="slider"></span>
+            </div>
+          </label>
+        </section>
+
+        <!-- Convocatoria de Jugadores -->
+        <section class="card roster-card">
+          <div class="roster-header">
+            <div>
+              <h2 class="card-title">Convocatoria del Día</h2>
+              <p id="convocados-count" class="card-description">10 de 10 seleccionados</p>
+            </div>
+            <div class="roster-quick-actions">
+              <button id="btn-select-all" class="btn btn-text" type="button">Todos</button>
+              <span class="divider">|</span>
+              <button id="btn-deselect-all" class="btn btn-text" type="button">Ninguno</button>
+            </div>
+          </div>
+
+          <div id="roster-list" class="roster-list">
+            <!-- Roster items renderizados dinámicamente con app.js -->
+          </div>
+        </section>
+      </main>
+
+      <!-- Barra inferior fija -->
+      <footer class="bottom-action-bar">
+        <button id="btn-start-match" class="btn btn-primary btn-block btn-lg" type="button">
+          ⚽ IR AL PARTIDO
+        </button>
+      </footer>
+    </section>
+
+    <!-- ==================== VISTA 2: PARTIDO EN VIVO ==================== -->
+    <section id="match-view" class="view">
+      <!-- Cabecera Fija: Reloj General y Controles Globales -->
+      <header class="match-header">
+        <div class="general-timer-row">
+          <div class="timer-main-display">
+            <span class="timer-label">PARTIDO</span>
+            <span id="general-timer-display" class="timer-digits">25:00</span>
+          </div>
+          <div class="general-actions">
+            <button id="btn-general-toggle" class="btn btn-icon-round" type="button" title="Iniciar/Pausar reloj general">
+              <span id="btn-general-icon">▶️</span>
+            </button>
+            <button id="btn-general-reset" class="btn btn-sm btn-outline" type="button" title="Reiniciar a 25:00 para la 2ª Parte">
+              🔄 2ª Parte
+            </button>
+          </div>
+        </div>
+
+        <div class="turn-quick-bar">
+          <div class="turn-indicator">
+            <span class="turn-label">Turno actual:</span>
+            <span id="match-turn-display" class="turn-value">05:00 min</span>
+          </div>
+          <div class="turn-controls">
+            <button id="btn-match-turn-minus" class="btn btn-mini" type="button" title="Restar 1 min al turno base">−1m</button>
+            <button id="btn-match-turn-plus" class="btn btn-mini" type="button" title="Sumar 1 min al turno base">+1m</button>
+          </div>
+        </div>
+
+        <div class="global-action-row">
+          <button id="btn-global-toggle" class="btn btn-global btn-pause" type="button">
+            <span id="global-toggle-icon">⏸️</span>
+            <span id="global-toggle-text">PAUSAR TODO</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Contenido scrolleable del partido -->
+      <main class="match-content">
+        <!-- ZONA SUPERIOR: EN PISTA -->
+        <section class="match-section pitch-section">
+          <div class="section-title-row">
+            <div class="title-with-badge">
+              <h2 class="section-title">🏃 EN PISTA</h2>
+              <span id="pitch-count-badge" class="count-badge">0</span>
+            </div>
+            <span class="sort-hint">🔥 Más urgente arriba</span>
+          </div>
+
+          <div id="pitch-players-list" class="pitch-players-list">
+            <!-- Tarjetas de jugadores en pista ordenadas por remainingMs ASC -->
+          </div>
+
+          <div id="pitch-empty-msg" class="empty-state">
+            <span class="empty-icon">👟</span>
+            <p class="empty-text">No hay jugadores en pista.</p>
+            <p class="empty-subtext">Pulsa <strong>[ ▶️ Empezar ]</strong> en los titulares del banquillo para arrancar sus turnos.</p>
+          </div>
+        </section>
+
+        <!-- ZONA INFERIOR: BANQUILLO -->
+        <section class="match-section bench-section">
+          <div class="section-title-row">
+            <div class="title-with-badge">
+              <h2 class="section-title">🪑 BANQUILLO</h2>
+              <span id="bench-count-badge" class="count-badge">0</span>
+            </div>
+            <span class="sort-hint">Suplentes disponibles</span>
+          </div>
+
+          <div id="bench-players-list" class="bench-players-list">
+            <!-- Filas de jugadores suplentes -->
+          </div>
+
+          <div id="bench-empty-msg" class="empty-state" style="display: none;">
+            <span class="empty-icon">👥</span>
+            <p class="empty-text">Todos los convocados están en la pista.</p>
+          </div>
+        </section>
+      </main>
+
+      <!-- Pie de Página Fijo / Discreto -->
+      <footer class="match-footer">
+        <button id="btn-back-setup" class="btn btn-link btn-settings" type="button">
+          ⚙️ Modificar Convocatoria
+        </button>
+      </footer>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

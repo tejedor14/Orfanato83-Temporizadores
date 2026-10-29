@@ -1,0 +1,961 @@
+/* ==========================================================================
+   FUTSAL CRONO - HOJA DE ESTILOS CSS3
+   Diseño optimizado para Android en modo vertical (Light Mode / Alto Contraste)
+   ========================================================================== */
+
+:root {
+  --bg-app: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --border-card: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+
+  /* Estados Semáforo */
+  --status-normal-bg: #ECFDF5;
+  --status-normal-border: #10B981;
+  --status-normal-text: #065F46;
+
+  --status-warning-bg: #FFFBEB;
+  --status-warning-border: #F59E0B;
+  --status-warning-text: #92400E;
+
+  --status-expired-bg: #FEF2F2;
+  --status-expired-blink: #FECACA;
+  --status-expired-border: #EF4444;
+  --status-expired-text: #B91C1C;
+
+  /* Colores de Marca y Botones */
+  --primary: #2563EB;
+  --primary-hover: #1D4ED8;
+  --primary-light: #EFF6FF;
+  --primary-border: #3B82F6;
+
+  --success: #10B981;
+  --success-dark: #059669;
+  --danger: #EF4444;
+  --amber: #F59E0B;
+
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset y caja base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 1.4;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Contenedor Principal */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 540px;
+  margin: 0 auto;
+  position: relative;
+  background-color: var(--bg-app);
+}
+
+/* Manejo de Vistas */
+.view {
+  display: none;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.view.active {
+  display: flex;
+}
+
+/* ==========================================================================
+   VISTA 1: CONFIGURACIÓN DE CONVOCATORIA
+   ========================================================================== */
+
+.view-header {
+  padding: 24px 20px 16px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-card);
+  text-align: center;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo-title .icon {
+  font-size: 28px;
+}
+
+.view-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.view-header .subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.view-content {
+  flex: 1;
+  padding: 16px 16px 90px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tarjetas */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.card-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.card-description {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Control Stepper (+ / -) */
+.stepper-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #F1F5F9;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+}
+
+.stepper-value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stepper-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.stepper-unit {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.btn-step {
+  min-width: 72px;
+  height: 48px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+}
+
+/* Interruptor Toggle */
+.toggle-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.toggle-info {
+  flex: 1;
+}
+
+.toggle-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.toggle-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #CBD5E1;
+  transition: 0.25s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.25s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Convocatoria */
+.roster-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-card);
+}
+
+.roster-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roster-quick-actions .divider {
+  color: var(--border-card);
+}
+
+.roster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roster-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-card);
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  min-height: 56px;
+}
+
+.roster-item:active {
+  transform: scale(0.99);
+}
+
+.roster-item.selected {
+  background-color: var(--primary-light);
+  border-color: var(--primary-border);
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #F1F5F9;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.roster-item.selected .player-number {
+  background: var(--primary);
+  color: white;
+}
+
+.player-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.roster-item.selected .player-name {
+  font-weight: 700;
+  color: #1E3A8A;
+}
+
+.player-status-badge {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-convocado {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
+.badge-ausente {
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+/* Barra inferior fija */
+.bottom-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border-card);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 50;
+}
+
+/* ==========================================================================
+   VISTA 2: PARTIDO EN VIVO
+   ========================================================================== */
+
+/* Cabecera Fija del Partido */
+.match-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #FFFFFF;
+  border-bottom: 2px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+  padding: 12px 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.general-timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timer-main-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.timer-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.timer-digits {
+  font-size: 38px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+.general-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-icon-round {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: #F1F5F9;
+  border: 1px solid var(--border-card);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.btn-icon-round:active {
+  transform: scale(0.92);
+  background: #E2E8F0;
+}
+
+.btn-outline {
+  background: white;
+  border: 1px solid var(--border-card);
+  color: var(--text-main);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+}
+
+/* Barra rápida de ajuste de turno */
+.turn-quick-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+}
+
+.turn-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.turn-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.turn-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.turn-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-mini {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: white;
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.btn-mini:active {
+  background: #E2E8F0;
+}
+
+/* Botón Gigante de Acción Global */
+.global-action-row {
+  width: 100%;
+}
+
+.btn-global {
+  width: 100%;
+  height: 54px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-global:active {
+  transform: scale(0.98);
+}
+
+.btn-global.btn-pause {
+  background-color: #F59E0B;
+  color: #FFFFFF;
+}
+
+.btn-global.btn-pause:active {
+  background-color: #D97706;
+}
+
+.btn-global.btn-resume {
+  background-color: #10B981;
+  color: #FFFFFF;
+}
+
+.btn-global.btn-resume:active {
+  background-color: #059669;
+}
+
+/* Contenido del Partido */
+.match-content {
+  flex: 1;
+  padding: 16px 16px 80px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.match-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.title-with-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-main);
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: #E2E8F0;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.sort-hint {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   TARJETAS DE JUGADORES EN PISTA (SEMÁFORO)
+   ========================================================================== */
+
+.pitch-players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.player-card {
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Estados de Semáforo */
+.player-card.status-normal {
+  background-color: var(--status-normal-bg);
+  border: 2px solid var(--status-normal-border);
+}
+
+.player-card.status-normal .player-timer-digits {
+  color: var(--status-normal-text);
+}
+
+.player-card.status-warning {
+  background-color: var(--status-warning-bg);
+  border: 2px solid var(--status-warning-border);
+}
+
+.player-card.status-warning .player-timer-digits {
+  color: var(--status-warning-text);
+}
+
+.player-card.status-expired {
+  border: 2px solid var(--status-expired-border);
+  animation: pulseExpired 1.2s infinite ease-in-out;
+}
+
+.player-card.status-expired .player-timer-digits {
+  color: var(--status-expired-text);
+  font-weight: 900;
+}
+
+@keyframes pulseExpired {
+  0% {
+    background-color: var(--status-expired-bg);
+  }
+  50% {
+    background-color: var(--status-expired-blink);
+  }
+  100% {
+    background-color: var(--status-expired-bg);
+  }
+}
+
+/* Interior de la tarjeta en pista */
+.player-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-card-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.player-card-status-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.status-normal .player-card-status-label {
+  background: #A7F3D0;
+  color: #065F46;
+}
+
+.status-warning .player-card-status-label {
+  background: #FDE68A;
+  color: #92400E;
+}
+
+.status-expired .player-card-status-label {
+  background: #FECACA;
+  color: #991B1B;
+}
+
+.player-timer-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.player-timer-digits {
+  font-size: 42px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.player-card-paused-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748B;
+  background: #E2E8F0;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Botones de acción individual dentro de la tarjeta */
+.player-actions-row {
+  display: grid;
+  grid-template-columns: 52px 52px 52px 1fr;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.btn-card-action {
+  height: 42px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.btn-card-action:active {
+  background: #F1F5F9;
+  transform: scale(0.96);
+}
+
+.btn-card-sub {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #334155;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-card-sub:active {
+  background: #FEE2E2;
+  border-color: #F87171;
+  color: #991B1B;
+}
+
+/* ==========================================================================
+   ZONA BANQUILLO (SUPLENTES)
+   ========================================================================== */
+
+.bench-players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bench-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  min-height: 56px;
+}
+
+.bench-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.btn-bench-start {
+  background-color: var(--success);
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.25);
+  transition: transform 0.1s ease, background-color 0.15s;
+}
+
+.btn-bench-start:active {
+  background-color: var(--success-dark);
+  transform: scale(0.96);
+}
+
+/* Estados Vacíos */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: #FFFFFF;
+  border: 2px dashed var(--border-card);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.empty-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.empty-subtext {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  max-width: 280px;
+}
+
+/* Pie de Página del Partido */
+.match-footer {
+  text-align: center;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-card);
+}
+
+.btn-settings {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.btn-settings:active {
+  color: var(--primary);
+}
+
+/* ==========================================================================
+   BOTONES GENERALES
+   ========================================================================== */
+
+.btn {
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 800;
+}
+
+.btn-primary:active {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:disabled {
+  background-color: #CBD5E1;
+  color: #94A3B8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 1px solid var(--border-card);
+  color: var(--text-main);
+}
+
+.btn-secondary:active {
+  background-color: #F1F5F9;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 6px;
+}
+
+.btn-lg {
+  height: 52px;
+  font-size: 17px;
+  border-radius: var(--radius-md);
+}
+
+.btn-block {
+  width: 100%;
+}

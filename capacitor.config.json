@@ -1,0 +1,8 @@
+{
+  "appId": "com.orfanato.futsalcrono",
+  "appName": "Futsal Crono",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  }
+}
